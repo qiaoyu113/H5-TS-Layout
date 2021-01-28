@@ -247,7 +247,7 @@ export function getTime(type: string) {
   }
 }
 
-export function debounce(func: { apply: (arg0: any, arg1: any[]) => any }, wait: any, immediate: any) {
+export function debounce(func: { apply: (arg0: any, arg1: any[]) => any }, wait: any, immediate: any = false) {
   let timeout: number | null, args: any, context: any, timestamp: number, result: any
 
   const later = function() {

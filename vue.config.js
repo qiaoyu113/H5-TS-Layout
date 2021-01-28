@@ -273,7 +273,7 @@ module.exports = {
           // 直接覆盖变量
           // 或者可以通过 less 文件覆盖（文件路径为绝对路径）
           // eslint-disable-next-line quotes
-          hack: `true; @import "style/vant_variable.less";`
+          hack: `true; @import "${resolve('src/style/vant_variable.less')}";`
         }
       }
     }
