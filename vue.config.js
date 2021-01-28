@@ -168,15 +168,15 @@ module.exports = {
       .end()
 
     // set preserveWhitespace
-    // config.module
-    //   .rule('vue')
-    //   .use('vue-loader')
-    //   .loader('vue-loader')
-    //   .tap(options => {
-    //     options.compilerOptions.preserveWhitespace = true
-    //     return options
-    //   })
-    //   .end()
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options.compilerOptions.preserveWhitespace = true
+        return options
+      })
+      .end()
 
     config
     // https://webpack.js.org/configuration/devtool/#development
@@ -272,7 +272,7 @@ module.exports = {
           // 直接覆盖变量
           // 或者可以通过 less 文件覆盖（文件路径为绝对路径）
           // eslint-disable-next-line quotes
-          // hack: `true; @import "style/vant_variable.less";`
+          hack: `true; @import "style/vant_variable.less";`
         }
       }
     }

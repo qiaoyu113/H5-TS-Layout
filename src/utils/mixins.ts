@@ -1,16 +1,16 @@
 import { mapState } from 'vuex'
-export const addCach = {
+export const addCach: any = {
   data() {
     return {
       originComponent: ''
     }
   },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
+  beforeRouteEnter(to: any, from: { meta: { keepAlive: any } }, next: (arg0: (vm: any) => void) => void) {
+    next((vm: { originComponent: any }) => {
       if (from.meta.keepAlive) { vm.originComponent = from }
     })
   },
-  beforeRouteLeave(to, from, next) {
+  beforeRouteLeave(to: { name: any; meta: { isCach: boolean } }, from: any, next: () => void) {
     // if (this.originComponent.name === to.name && this.cachedViews.includes(to.name)) {
     if (this.cachedViews.includes(to.name)) {
       to.meta.isCach = true
@@ -23,7 +23,7 @@ export const addCach = {
   },
   computed: {
     ...mapState({
-      cachedViews: (state) => state['cached-views'].cachedViews
+      cachedViews: (state: any) => state['cached-views'].cachedViews
     })
   }
 }

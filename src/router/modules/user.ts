@@ -1,4 +1,6 @@
-export default [
+import { RouteConfig } from 'vue-router'
+
+const UserRouter: RouteConfig | any = [
   {
     path: '/login',
     name: 'login',
@@ -55,3 +57,5 @@ export default [
     }
   }
 ]
+
+export default UserRouter

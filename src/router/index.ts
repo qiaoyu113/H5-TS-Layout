@@ -2,11 +2,13 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import store from '@/store'
 
+import UserRouter from './modules/user'
+
 Vue.use(VueRouter)
 
 let routes: Array<RouteConfig> = [
   {
-    path: '*',
+    path: '/404',
     name: '404',
     // component: () => import(/* webpackChunkName: "404" */ 'views/404.vue'),
     component: resolve => require(['@/views/404'], resolve),
@@ -17,17 +19,25 @@ let routes: Array<RouteConfig> = [
   }
 ]
 
-const routerContext = require.context('./', true, /\.js$/)
-routerContext.keys().forEach(route => {
-  // 如果是根目录的 index.js 、不处理
-  if (route.startsWith('./index')) {
-    return
-  }
-  const routerModule = routerContext(route)
-  /**
-   * 兼容 import export 和 require module.export 两种规范
-   */
-  routes = routes.concat(routerModule.default || routerModule)
+routes = routes.concat(UserRouter)
+
+// const routerContext = require.context('./', true, /\.ts$/)
+// console.log(1, routerContext.keys())
+// routerContext.keys().forEach(route => {
+//   // 如果是根目录的 index.js 、不处理
+//   if (route.startsWith('./index')) {
+//     return
+//   }
+//   const routerModule = routerContext(route)
+//   /**
+//    * 兼容 import export 和 require module.export 两种规范
+//    */
+//   routes = routes.concat(routerModule.default || routerModule)
+// })
+
+routes = routes.concat({
+  path: '*',
+  redirect: '/404'
 })
 
 const createRouter = () => new VueRouter({
@@ -51,6 +61,7 @@ let historyCount = history.getItem('count') * 1 || 0
 history.setItem('/', 0)
 
 myRouter.beforeEach((to: any, from: any, next: any) => {
+  console.log(to)
   if (to.params.direction) {
     store.commit('updateDirection', to.params.direction)
   } else {

@@ -2,7 +2,6 @@ import axios from 'axios'
 import { Toast } from 'vant'
 // import store from '@/store'
 import { getToken } from '@/utils/auth'
-import JsCookie from 'js-cookie'
 
 // let url = 'http://firmiana-wechat.yunniao.cn/'
 // if (window.location.host !== 'firmiana-wechat.yunniao.cn') {
@@ -34,12 +33,6 @@ service.interceptors.request.use(
       // config.headers['userId'] = 68
       config.headers['platform'] = 0
     }
-    const cookieName = localStorage.getItem('developer')
-    if (cookieName) {
-      JsCookie.set('developer', cookieName)
-    } else {
-      JsCookie.set('developer', 'qiaoyu')
-    }
     return config
   },
   error => {
@@ -70,7 +63,7 @@ service.interceptors.response.use(
     if (res.code === 40101) {
       Toast({
         message: res.message,
-        type: 'error',
+        type: 'fail',
         duration: 5 * 1000
       })
       localStorage.removeItem('token')
@@ -102,7 +95,7 @@ service.interceptors.response.use(
     if (error.message.includes('timeout') || error.message.includes('500')) { // 判断请求异常信息中是否含有超时timeout字符串
       Toast({
         message: '当前网络超时，请检查网络重新尝试',
-        type: 'error',
+        type: 'fail',
         duration: 4 * 1000
       })
       return Promise.reject(error) // reject这个错误信息
