@@ -35,6 +35,20 @@ const externals = {
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
+const plugins = [
+  new SentryWebpackPlugin({
+    // sentry-cli configuration
+    authToken: 'dcffdeeace6b4aa3a8bc3b1d571be2350b5bb3d456d746759b1157b27f15137e',
+    release: process.env.NODE_ENV === 'production',
+    org: 'sentry',
+    project: 'szjw-h5',
+    // webpack specific configuration
+    include: process.env.NODE_ENV === 'production' ? './web' : './', // 需要上传到sentry服务器的资源目录,会自动匹配js 以及map文件
+    configFile: '.sentryclirc',
+    ignore: ['node_modules', 'webpack.config.js'],
+    urlPrefix: '~/js' //  线上对应的url资源的相对路径 比如我的域名是 http://XXX  .com/,静态资源都在 static文件夹里面,
+  })
+]
 
 module.exports = {
   publicPath: IS_PRODUCTION ? cdnDomian : '/',
@@ -92,20 +106,7 @@ module.exports = {
       filename: `[name].${Timestamp}.js`,
       chunkFilename: `[name].${Timestamp}.js`
     },
-    plugins: [
-      new SentryWebpackPlugin({
-        // sentry-cli configuration
-        authToken: 'dcffdeeace6b4aa3a8bc3b1d571be2350b5bb3d456d746759b1157b27f15137e',
-        release: process.env.NODE_ENV === 'production',
-        org: 'sentry',
-        project: 'szjw-h5',
-        // webpack specific configuration
-        include: process.env.NODE_ENV === 'production' ? './web' : './', // 需要上传到sentry服务器的资源目录,会自动匹配js 以及map文件
-        configFile: '.sentryclirc',
-        ignore: ['node_modules', 'webpack.config.js'],
-        urlPrefix: '~/js' //  线上对应的url资源的相对路径 比如我的域名是 http://XXX  .com/,静态资源都在 static文件夹里面,
-      })
-    ],
+    plugins: process.env.NODE_ENV === 'production' ? plugins : [],
     performance: {
       hints: false
     }
@@ -168,15 +169,15 @@ module.exports = {
       .end()
 
     // set preserveWhitespace
-    // config.module
-    //   .rule('vue')
-    //   .use('vue-loader')
-    //   .loader('vue-loader')
-    //   .tap(options => {
-    //     options.compilerOptions.preserveWhitespace = true
-    //     return options
-    //   })
-    //   .end()
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options.compilerOptions.preserveWhitespace = true
+        return options
+      })
+      .end()
 
     config
     // https://webpack.js.org/configuration/devtool/#development
