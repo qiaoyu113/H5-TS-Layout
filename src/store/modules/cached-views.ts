@@ -45,6 +45,7 @@ class TagsView extends VuexModule implements ITagsViewState {
 
   @Action
   public addView(view: any) {
+    console.log(view)
     this.ADD_CACHED_VIEW(view)
   }
 

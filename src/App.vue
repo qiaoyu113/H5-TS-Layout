@@ -44,26 +44,21 @@ export default class extends Vue {
   }
 
   @Watch('$route')
-  private onRouteChange() {
-    console.log(123)
+  private onRouteChange(to: any, from: any) {
+    console.log(to, 1111)
+    const { name } = this.$route
+    if (name === 'index') {
+      this.$store.dispatch('cached-views/delAllViews')
+      return false
+    }
+    if (name) {
+      this.$store.dispatch('cached-views/addView', this.$route)
+    }
+    if (from.name !== 'index' && from.name !== 'OutSidefreightlist' && from.name !== 'OutSidefreight' && to.meta.keepAlive && !to.meta.isCach && (!from.meta.search && !to.meta.search)) {
+      this.$store.dispatch('cached-views/delView', this.$route)
+      to.meta.isCach = false
+    }
   }
-
-  // @watch: {
-  // $route(to, from) {
-  //   console.log(to, 1111)
-  //   const { name } = this.$route
-  //   if (name === 'index') {
-  //     this.$store.dispatch('cached-views/delAllViews')
-  //     return false
-  //   }
-  //   if (name) {
-  //     this.$store.dispatch('cached-views/addView', this.$route)
-  //   }
-  //   if (from.name !== 'index' && from.name !== 'OutSidefreightlist' && from.name !== 'OutSidefreight' && to.meta.keepAlive && !to.meta.isCach && (!from.meta.search && !to.meta.search)) {
-  //     this.$store.dispatch('cached-views/delView', this.$route)
-  //     to.meta.isCach = false
-  //   }
-  // }
 }
 // export default {
 //   name: 'App',

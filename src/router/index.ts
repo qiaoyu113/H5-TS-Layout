@@ -20,7 +20,7 @@ let routes: Array<RouteConfig> = [
 ]
 
 routes = routes.concat(UserRouter)
-
+console.log(routes)
 // const routerContext = require.context('./', true, /\.ts$/)
 // console.log(1, routerContext.keys())
 // routerContext.keys().forEach(route => {

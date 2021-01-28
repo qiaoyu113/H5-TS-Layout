@@ -10,12 +10,12 @@ import store from '@/store'
 // import '@/icons' // icon
 // import '@/style/reset.less' // 常用样式
 // import '@/style/common.scss'
-import '@/styles/vant_variable.scss'
 import 'vant/lib/index.less'// 全局引入Vant 样式
+import '@/style/vant_variable.less'
 import VConsole from 'vconsole'
 import defaultSettings from '@/settings'
 // import * as filters from '@/filters'
-import global_ from 'components/global/index.vue'
+import global_ from 'components/Global.vue'
 // import { Toast } from 'vant'
 // import * as directives from '@/directives'
 // import { Lazyload } from 'vant'
