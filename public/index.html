@@ -1,17 +1,119 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <% if (process.env.NODE_ENV === 'production') { %> <% for(var css of
+      htmlWebpackPlugin.options.cdn.css) { %>
+      <link href="<%=css%>" rel="preload" as="style" />
+      <link rel="stylesheet" href="<%=css%>" as="style" />
+      <% } %> <% for(var js of htmlWebpackPlugin.options.cdn.js) { %>
+      <link href="<%=js%>" rel="preload" as="script" />
+      <script src="<%=js%>"></script>
+      <% } %> <% } %>
+    <title>梧桐综合业务支撑平台</title>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <!-- <script type = "text/javascript">
+      (function() {
+        if (window.zhuge) return;
+        window.zhuge = [];
+        window.zhuge.methods = "_init identify track trackRevenue getDid getSid getKey setSuperProperty setUserProperties setWxProperties setPlatform".split(" ");
+        window.zhuge.factory = function(b) {
+          return function() {
+            var a = Array.prototype.slice.call(arguments);
+            a.unshift(b);
+            window.zhuge.push(a);
+            return window.zhuge;
+          }
+        };
+        for (var i = 0; i < window.zhuge.methods.length; i++) {
+          var key = window.zhuge.methods[i];
+          window.zhuge[key] = window.zhuge.factory(key);
+        }
+        window.zhuge.load = function(b, x) {
+          if (!document.getElementById("zhuge-js")) {
+            var a = document.createElement("script");
+            var verDate = new Date();
+            var verStr = verDate.getFullYear().toString() + verDate.getMonth().toString() + verDate.getDate().toString();
+
+            a.type = "text/javascript";
+            a.id = "zhuge-js";
+            a.async = !0;
+            a.src = 'https://zgsdk.zhugeio.com/zhuge.min.js?v=' + verStr;
+            a.onerror = function() {
+              window.zhuge.identify = window.zhuge.track = function(ename, props, callback) {
+                if(callback && Object.prototype.toString.call(callback) === '[object Function]') {
+                  callback();
+                } else if (Object.prototype.toString.call(props) === '[object Function]') {
+                  props();
+                }
+              };
+            };
+            var c = document.getElementsByTagName("script")[0];
+            c.parentNode.insertBefore(a, c);
+            window.zhuge._init(b, x)
+          }
+        };
+        window.zhuge.load('62f60f4d7c4b42edbe7178b993c04090', { //配置应用的AppKey
+          superProperty: { //全局的事件属性(选填)
+            '应用名称': '朱雀'
+          },
+          debug: false,
+          adTrack: false,//广告监测开关，默认为false
+          zgsee: false,//视屏采集开关， 默认为false
+          autoTrack: true,
+          //启用全埋点采集（选填，默认false）
+          singlePage: false //是否是单页面应用（SPA），启用autoTrack后生效（选填，默认false）
+        });
+      })();
+    </script> -->
+    <!-- GrowingIO Analytics code version 2.1 -->
+    <!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+    <!-- <script type='text/javascript'>
+      !function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.1/gio.js","gio");
+        gio('init','a406c1da5dbda072','', { debug: false });
+        gio('config', {'hashtag':true});
+        gio('config', {'imp':false});
+      //custom page code begin here
+      //custom page code end here
+      gio('send');
+    </script> -->
+    <!-- <script type="text/javascript">
+      !function(e,t,n,g,i){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)},n=t.createElement("script"),tag=t.getElementsByTagName("script")[0],n.async=1,n.src=('https:'==document.location.protocol?'https://':'http://')+g,tag.parentNode.insertBefore(n,tag)}(window,document,"script","assets.giocdn.com/2.0/gio-wxwv.js","gio");
+      // ‘你的appid’为选填项，如果你的微信内嵌页应用有微信分配的appid，建议填写；如果没有，可以留空。
+      gio('init', 'a406c1da5dbda072', '', { debug: false });
+      gio('send');
+    </script> -->
+    <!-- End GrowingIO Analytics code version: 2.1 -->
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but frimiana_of_corp doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
   </body>
+
+    <!--fundebug-->
+    <script type="text/javascript">
+      if(window.location.host === 'szjw-bss-h5.yunniao.cn'){
+        // fundebug
+        loadScript("https://js.fundebug.cn/fundebug.2.0.0.min.js", "c3e1376410ea835aec52482ae33b73a209bece8c959216669fda0845b6d8cf60")
+      }
+      function loadScript(url, apikey) {
+          var script = document.createElement("script");
+          script.type = "text/javascript";
+          script.src = url;
+          script.setAttribute("apikey", apikey);
+          document.body.appendChild(script);
+      }
+      </script>
 </html>
+
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=5ec7324acf83be9391764c93e3f46570"></script>

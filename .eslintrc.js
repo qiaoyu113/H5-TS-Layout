@@ -11,8 +11,6 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020
   },
-  //'no-unused-vars': 'off',
-  // '@typescript-eslint/no-unused-vars': ['error'],
   // add your custom rules here
   //it is base on https://github.com/vuejs/eslint-config-vue
   rules: {
@@ -72,6 +70,7 @@ module.exports = {
       'capIsNew': false
     }],
     'new-parens': 2,
+    "no-var-requires": 0,
     'no-array-constructor': 2,
     'no-caller': 2,
     'no-console': 'off',
